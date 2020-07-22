@@ -1,22 +1,27 @@
-<html>
-    <h2>Json</h2>
-    <div id="app">
-        <ul>
-            <li v-for="home in homes">
-            {{home}}
-            <li>
-        </ul>
-    </div>
+<h2>Json</h2>
+<div id="app">
+    <ul>
+        <li v-for="home in homes">
+        {{home.father}}
+        </li>
+    </ul>
+    <table border='1'>
+        <tr v-for="home in homes">
+            <td> {{home.father}}</td>
+            <td> {{home.mother}}</td>
+        </tr>
+    </table>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-</html>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
 
 <script>
     var app=new Vue({
         el:'#app',
         data:{
-            home:[{father:'a'},{father:'b'}]
-        },
+            homes:[{father:'a',mother:'a1'},{father:'b',mother:'b1'}]
+        }
 
     })
 </script>
