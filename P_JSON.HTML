@@ -1,5 +1,8 @@
 <h2>Json</h2>
 <div id="app">
+    <textarea v-model="areaToalert"></textarea>
+    <button type="button" @click="toView">button</button></button>
+  
     <ul>
         <li v-for="home in homes">
         {{home.father}}
@@ -20,7 +23,14 @@
     var app=new Vue({
         el:'#app',
         data:{
-            homes:[{father:'a',mother:'a1'},{father:'b',mother:'b1'}]
+            homes:[{father:'a',mother:'a1'},{father:'b',mother:'b1'}],
+            areaToalert:JSON.stringify([{father:'a'}]),
+        },
+        methods:{
+            toView:function(){
+                var cc=JSON.stringify(this.areaToalert);
+                alert(cc);
+            }
         }
 
     })
