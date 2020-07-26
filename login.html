@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .banner{
+            width: 100%; 
+            height: 100vh;
+            background-image:url(https://picsum.photos/1950/1000/?radim1);
+        }
+        .box{
+            position: relative;
+            width: 600px;
+            height: 800px;
+            margin: auto;
+        }
+        .lit{
+           
+            display: flex;
+            flex-direction: column;
+            background-color: lavender;
+            position: absolute;
+            justify-content: center;
+            top: 100px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+        .input{
+            
+            display: flex;
+            flex-direction: column;
+        }
+        .textt{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: absolute;
+            top: 0px;
+           
+        }
+        .gogo{
+            margin-top: 20px;
+        }
+        .gojosn{
+            width: 600px;
+            height: 156px;
+            display: flex;
+            flex-direction: row;;
+            justify-content:space-between;
+            position: absolute;
+            left: 0;
+            bottom:0;
+   
+        }
+        
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div class="banner">
+        <div class="box">
+            
+            <div class="lit">
+                <div class="textt">
+                    <h1>圖是假圖有點大張，讀的慢請見諒</h1>
+                    <p>
+                        此頁的目的是展現微微的css,還有使用vue.js按下確定後傳出的json格式與json傳入後的作用。
+                    </p>
+                </div>
+                <div class="input">
+                    請輸入帳號：<input type="text" class="Acc" v-model="Acc"><br>
+                    請輸入帳號：<input type="password" class="pwd" v-model="pwd">
+                    <button class="gogo" @click="_sned">確定</button>
+                </div>
+                <div class="gojosn">
+                    <textarea name="" id="" cols="30" rows="10" >{{jjson}}</textarea>
+                    <button @click="okreturn">確定</button>
+                    <textarea name="" id="" cols="30" rows="10" >{{rreturn}}</textarea>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        var app=new Vue({
+            el:'.banner',
+            data:{
+                message:'aaaa',
+                Acc:'',
+                pwd:'',
+                jjson:[],
+                rreturn:[{success:true}]
+            },methods:{
+                _sned:function(Acc,pwd){
+                    this.jjson=[];
+                    this.jjson.push({Account:this.Acc,password:this.pwd});
+                },
+                okreturn:function(){
+                   var myj=JSON.stringify(this.rreturn);
+                   console.log(myj.success)
+
+
+                }
+            }
+
+
+        })
+     </script>
+</body>
+</html>

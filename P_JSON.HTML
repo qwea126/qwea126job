@@ -4,10 +4,17 @@
     <button type="button" @click="toView">button</button></button>
   
     <ul>
-        <li v-for="home in homes">
-        {{home.father}}
+        <li v-for="areaToalerts in areaToalert2">
+        {{areaToalerts.father}}
+		{{areaToalerts.mother}}
         </li>
     </ul>
+	<table border='1'>
+        <tr v-for="areaToalerts in areaToalert2">
+            <td> {{areaToalerts.father}}</td>
+            <td> {{areaToalerts.mother}}</td>
+        </tr>
+    </table>
     <table border='1'>
         <tr v-for="home in homes">
             <td> {{home.father}}</td>
@@ -24,12 +31,17 @@
         el:'#app',
         data:{
             homes:[{father:'a',mother:'a1'},{father:'b',mother:'b1'}],
-            areaToalert:JSON.stringify([{father:'a'}]),
+            areaToalert:JSON.stringify([{father:'a',mother:'b'}]),
+            areaToalert2:'',
+
+            //areaToalert2:JSON.parse(this.areaToalert)
+
         },
         methods:{
             toView:function(){
-                var cc=JSON.stringify(this.areaToalert);
-                alert(cc);
+                var cc=JSON.parse(this.areaToalert);
+                this.areaToalert2=cc;
+                alert(cc)
             }
         }
 
