@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+		*{
+            margin: 0;
+            padding: 0;
+        }
+		.banner{
+            width: 100%; 
+            height:1000px;
+			background-image:url(https://picsum.photos/1950/1000/?radim1);
+			display: flex;
+			justify-content: center;
+			align-items: center; 
+        }
+		.ccenter{
+			background-color:green;
+			width:600px;
+			height:900px;
+			display: flex;
+			flex-direction:column;
+		}
+		.ttext{
+			width:600px;
+			height:300px;
+			background-color:#FF8C8C;
+			
+		}
+		.llogin{
+			width:580px;
+			height:300px;
+			background-color:red;
+			display: flex;
+            flex-direction: column;
+			padding: 10px;
+			
+
+		}
+		.ttextarea{
+			width:600px;
+			height:300px;
+			background-color:yellow;
+			display: flex;
+            flex-direction: row;;
+            justify-content:space-between;
+			align-items: flex-end;
+
+		}
+		textarea{
+			width: 200px;
+			height: 100px;
+		}
+		.ttextarea button{
+			width: 100px;
+			height: 100px;
+		} 
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div class="banner">
+		<div class="ccenter">
+			<div class="ttext">
+				<h1>圖是假圖有點大張，讀的慢請見諒</h1>
+				<p>
+					此頁的目的是展現微微的css,還有使用vue.js按下確定後傳出的json格式與json傳入後的作用。
+				</p>
+			</div>
+			<div class="llogin">
+				請輸入帳號：<input type="text" class="Acc" v-model="Acc">
+				請輸入帳號：<input type="password" class="pwd" v-model="pwd"><br>
+				<button class="gogo" @click="_sned">確定</button>
+			</div>
+			<div class="ttextarea">
+				<textarea name="" id="" cols="30" rows="10" >{{jjson}}</textarea>
+				<button @click="okreturn">確定</button>
+				<textarea name="" id="" cols="30" rows="10" v-model='rrreturn'></textarea>
+			</div>
+		</div>
+	</div>
+	<script>
+        var app=new Vue({
+            el:'.banner',
+            data:{
+                message:'aaaa',
+                Acc:'',
+                pwd:'',
+				jjson:[],
+				rrreturn:JSON.stringify([{"success":"true"}])
+            },methods:{
+                _sned:function(Acc,pwd){
+                    this.jjson=[];
+                    this.jjson.push({Account:this.Acc,password:this.pwd});
+                },
+                okreturn:function(){
+                  
+                   console.log(JSON.parse(this.rrreturn)[0].success);
+				   if(document.cookie!=""){
+					if(JSON.parse(this.rrreturn)[0].success=="true")
+					{
+						alert('登入成功 按下確定後跳轉');
+						document.cookie = "loginok";
+						var strCookie = document.cookie;
+						console.log(strCookie);
+						location.href = "shopindex.html";
+					}else{
+						alert('帳號或密碼錯誤');
+					}
+				   }
+					
+
+
+               	}
+           	}
+
+
+        })
+     </script>
+</body>
+</html>
