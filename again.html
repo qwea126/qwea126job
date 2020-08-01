@@ -99,18 +99,18 @@
                 okreturn:function(){
                   
                    console.log(JSON.parse(this.rrreturn)[0].success);
-				   if(document.cookie!=""){
+				   
 					if(JSON.parse(this.rrreturn)[0].success=="true")
 					{
 						alert('登入成功 按下確定後跳轉');
 						document.cookie = "loginok";
 						var strCookie = document.cookie;
 						console.log(strCookie);
-						location.href = "shopindex.html";
+						location.href ="index.html";
 					}else{
 						alert('帳號或密碼錯誤');
 					}
-				   }
+				   
 					
 
 

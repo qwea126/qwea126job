@@ -20,11 +20,12 @@
         right: 0;
         left: 0;
         margin: auto;
-        opacity: 0.5;
+        background:rgba(0,0,0,0.6);
+        z-index:9999;
     }
+
     .head{
      display: flex;
-     padding:6px 10px;
      background-color: black;
      width: 100%;
     }
@@ -34,44 +35,189 @@
       font-size:0;
     }
     .menu a{
+      width: 3%;
       font-size: 10px;
       color: white;
       text-decoration:noe;
       display: inline-block;
       line-height: 40px;
       padding:10px 10px;
+      box-sizing: border-box;
+      text-align: center;
+      
     }
     .menu a:hover{
       background: orange;
     }
+    .banner{
+      width: 100%;
+      height: 400px;
+      margin-bottom: 0; 
+    }
     .banner img{
       width: 100%;
+      height: 100%;
+      
     }
-    
+    .cclose{
+        width: 40px;
+        height: 40px;
+        border-radius:999em;
+        background-color: black;
+        position:absolute;
+        top:0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+			  align-items: center; 
+        color:wheat;
+        opacity:10;
+
+    }
+    .prd{
+      width:100% ;
+      height: 400px;
+      display: flex;
+
+
+    }
+    .pprd{
+      width:80% ;
+      height: 400px;
+      background-color: turquoise;
+      display: flex;
+      flex-direction: row;
+      padding:10px;
+      justify-content:space-around;
+      
+    }
+    .prdjson{
+      width:20% ;
+      height: 400px;
+      background-color:springgreen;
+      padding: 10px;
+      
+    }    
+    .ttext{
+      width: 100%;
+      height: 100px;
+      display: flex;
+      align-items: flex-end;
+      box-sizing: border-box;
+      padding: 10px;
+
+    }
+ 
+    .ppprd{
+      border: 5px peru solid;
+      display: flex;
+      flex-direction:column;
+      position: relative;
+      transform: translateY(0px);
+      transition: 0.5s;
+      background-color: white;
+
+
+    }
+    .ccost{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+
+    }
+
+    .ppprd hr{
+      width:80% ;
+      color: gray;
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+    }
+    .ppprd:hover{
+      transform: translateY(-10px);
+      background-color: black;
+      color: white;
+    }
+    .banner img{
+      vertical-align: middle;
+    }
   </style>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <div class ="alll">
-  </div>
+<div class="app">
+    <div v-show="isActive" class="alll">
+      <p>廣告廣告，點擊連結先看我的履歷!!</p>
+      <button class="cclose"  @click="cclosead">X</button>
+    </div>
     <div class="head">
-    <img src="https://picsum.photos/80/40/?radim1" alt="">
-      <nav class="menu">
-        <a href="#">自傳</a>
-        <a href="#">經歷</a>
-        <a href="#"></a>
-        </nav>
+      <img src="https://picsum.photos/80/40/?radim1" alt="">
+        <nav class="menu">
+          <a href="#">自傳</a>
+          <a href="#">經歷</a>
+          <a href="#"></a>
+          </nav>
     </div>
-    
+      
     <div class="banner">
-      <img src="https://picsum.photos/1800/800/?radim2" alt="">
+      <img src="https://picsum.photos/1537/400?radim2" alt="">
     </div>
-  
-  <ul>
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-  </ul>
+    <div class="ttext">
+      <h1>電器類</h1>
+    </div>
+    <div class="prd">
+      
+      <div class="pprd">
+          <div class="ppprd" v-for="pprdjson in pprdjsons"> 
+            <img src="https://picsum.photos/300/200/?radim1" alt="">
+            <h3>
+              {{pprdjson.productName}}
+            </h3>
+            <hr>
+            <p>
+              {{pprdjson.Introduction}}
+            </p>
+            <h3 class="ccost">
+              新台幣:{{pprdjson.productCost}}元
+            <h3>
+          </div>
+      </div>
+      <div class="prdjson">
+        <textarea v-model='az'></textarea>
+        <button @click="jsongo">送出</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    var hj=[
+              {
+                "productName": "電視",
+                "productCost": "3000",
+                "Introduction": "好看好看好看好看好看"
+              },
+              {
+                "productName": "冷氣",
+                "productCost": "2000",
+                "Introduction": "好涼好涼好涼好涼好涼好涼"     
+          }];
+    var app=new Vue({
+        el:'.app',
+        data:{
+          isActive:true,
+          pprdjsons:hj,
+          az:JSON.stringify(hj)
 
+        },methods:{
+          cclosead:function(){
+             this.isActive=false;
+             console.log(this.pprdjsons);
+            },
+          jsongo:function(){
+              this.pprdjsons=JSON.parse(this.az);
+            }
+         }
+
+    })
+ </script>
 </body>
 </html>
