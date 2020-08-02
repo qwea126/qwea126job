@@ -28,6 +28,7 @@
 			width:600px;
 			height:300px;
 			background-color:#FF8C8C;
+			line-height:1.5
 			
 		}
 		.llogin{
@@ -66,9 +67,14 @@
 		<div class="ccenter">
 			<div class="ttext">
 				<h1>圖是假圖有點大張，讀的慢請見諒</h1>
+				<hr>
 				<p>
-					此頁的目的是展現微微的css,還有使用vue.js按下確定後傳出的json格式與json傳入後的作用。
+					此頁的目的是展現微微的css,還有使用vue.js的運用。<BR>
+					你可以輸入帳號密碼，按下確定後左下的TEXTAREA會顯示組出來的JSON。<br>
+					而右下代表回傳的狀態當當success為true時登入成功並跳轉，<br>
+					若為false則顯示登入失敗。
 				</p>
+
 			</div>
 			<div class="llogin">
 				請輸入帳號：<input type="text" class="Acc" v-model="Acc">
@@ -97,8 +103,6 @@
                     this.jjson.push({Account:this.Acc,password:this.pwd});
                 },
                 okreturn:function(){
-                  
-                   console.log(JSON.parse(this.rrreturn)[0].success);
 				   
 					if(JSON.parse(this.rrreturn)[0].success=="true")
 					{

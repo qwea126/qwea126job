@@ -42,7 +42,7 @@
       font-size:0;
     }
     .menu a{
-      width: 3%;
+      width: 5%;
       font-size: 10px;
       color: white;
       text-decoration:noe;
@@ -148,24 +148,108 @@
     .banner img{
       vertical-align: middle;
     }
+    .bbuyad{
+        width: 100%;
+        height: 100%;
+        background-color: gray;
+        position: fixed;
+        background:rgba(0,0,0,0.6);
+        z-index:9998;
+    }
+    .bbuycenter{
+      width: 700px;
+      height: 650px;
+      background-color: burlywood;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top:0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+
+
+    }
+    .bbuycenter img{
+      width: 400px;
+      height: 300px;
+    }
+    .qu{
+      width: 100%;
+      height: 300px;
+      display: flex;
+      position: relative;
+      background-color: chartreuse;
+    }
+    .qqu{
+      width: 100%;
+      height: 300px;
+      background-color: crimson;
+      position: relative;
+    }
+    .gogobuy{
+      width: 80px;
+      height: 70px;
+      position: absolute;
+      align-items: center;
+      bottom: 0;
+      background-color: darkgoldenrod;
+      color: #000;
+
+    }
+    .gogobuy:hover{
+      background-color: black;
+      color:white;
+
+    }
+    textarea{
+      width: 300px;
+      height: 320px;
+    }
   </style>
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 </head>
 <body>
 <div class="app">
     <div v-show="isActive" class="alll">
       <div class="adcneter">
-        <p><a href="chen.pdf">廣告廣告，點我看履歷</a></p>
+        <p>
+          <h3>此頁目的：</h3><BR>
+          展現微微的CSS與Vue.js的運用<br>
+          可以在右邊輸入或修改JSON並送出<BR>
+          也可點擊商品卡開購買詳細頁。
+            
+        </p>
         <button class="cclose"  @click="cclosead">X</button>
+      </div>
+      
+    </div>
+    <div class="bbuyad" v-show="orc">
+      <div class="bbuycenter">
+        <div class="bbuyname"><h1>{{testt.productName}}</h1></div>
+        <div class="qu">
+          <img src="https://picsum.photos/400/300/?radim1" alt="">
+          <div class="qqu">
+            <div class="qqu_cost"><h2>單價 : {{testt.productCost}} 元</h2></div>
+            <div class="qqu_qqu"><h3>我要買:<input type="number" v-model="qqqu" min="1">個</h3></div>
+            <div>總共 :{{testt.productCost * qqqu}} 元</div>
+            <button class="gogobuy" @click="postgogo(qqqu,testt.productName,testt.productCost*qqqu)">點我購買</button>
+          </div>
+
+        </div>
+        <div>{{testt.detial}}</div>
+        <button class="cclose"  @click="ccloseadd">X</button>
       </div>
       
     </div>
     <div class="head">
       <img src="https://picsum.photos/80/40/?radim1" alt="">
         <nav class="menu">
-          <a href="#">自傳</a>
-          <a href="#">經歷</a>
-          <a href="#"></a>
+          <a href="https://www.104.com.tw/jobs/main/">104</a>
+          <a href="https://www.instagram.com/">instagram</a>
+          <a href="https://www.google.com.tw/?hl=zh-TW">google</a>
           </nav>
     </div>
       
@@ -178,7 +262,7 @@
     <div class="prd">
       
       <div class="pprd">
-          <div class="ppprd" v-for="pprdjson in pprdjsons"> 
+          <div class="ppprd" v-for="pprdjson in pprdjsons" @click="bbuy(pprdjson)"> 
             <img src="https://picsum.photos/300/200/?radim1" alt="">
             <h3>
               {{pprdjson.productName}}
@@ -190,6 +274,7 @@
             <h3 class="ccost">
               新台幣:{{pprdjson.productCost}}元
             <h3>
+            
           </div>
       </div>
       <div class="prdjson">
@@ -203,28 +288,44 @@
               {
                 "productName": "電視",
                 "productCost": "3000",
-                "Introduction": "好看好看好看好看好看"
+                "Introduction": "好看好看好看好看好看",
+                "detial":"電視詳細電視詳細電視詳細電視詳細電視詳細"
               },
               {
                 "productName": "冷氣",
                 "productCost": "2000",
-                "Introduction": "好涼好涼好涼好涼好涼好涼"     
+                "Introduction": "好涼好涼好涼好涼好涼好涼",
+                "detial":"冷氣詳細冷氣詳細冷氣詳細冷氣詳細冷氣詳細"  
           }];
     var app=new Vue({
         el:'.app',
         data:{
           isActive:true,
           pprdjsons:hj,
-          az:JSON.stringify(hj)
+          az:JSON.stringify(hj),
+          testt:'a',
+          orc:false,
+          qqqu:'1'
 
         },methods:{
           cclosead:function(){
              this.isActive=false;
-             console.log(this.pprdjsons);
             },
           jsongo:function(){
               this.pprdjsons=JSON.parse(this.az);
-            }
+            },
+          bbuy:function(productName){
+            this.orc=true;
+            this.testt=productName;
+            
+          },
+          ccloseadd:function(){
+            this.orc=false;
+            this.qqqu='1';
+          },
+          postgogo:function(a,b,c){
+            alert("品名:"+b+"\n"+a+"台\n"+"總共"+c+"元")
+          }
          }
 
     })
